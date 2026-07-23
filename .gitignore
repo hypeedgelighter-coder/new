@@ -1,0 +1,14 @@
+﻿*.wdb
+*.dcp
+*.jou
+*.log
+*.pb
+*.rst
+*.backup.*
+**/xsim.dir/
+**/.Xil/
+**/*.runs/
+**/*.sim/
+**/*.cache/
+**/*.hw/
+**/*.ip_user_files/
