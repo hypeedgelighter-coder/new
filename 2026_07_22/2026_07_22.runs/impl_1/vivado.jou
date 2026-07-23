@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Thu Jul 23 09:11:45 2026
+# Process ID: 18060
+# Current directory: D:/work/26_AI_COMP_1/2026_07_22/2026_07_22.runs/impl_1
+# Command line: vivado.exe -log top_counter_10000.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source top_counter_10000.tcl -notrace
+# Log file: D:/work/26_AI_COMP_1/2026_07_22/2026_07_22.runs/impl_1/top_counter_10000.vdi
+# Journal file: D:/work/26_AI_COMP_1/2026_07_22/2026_07_22.runs/impl_1\vivado.jou
+#-----------------------------------------------------------
+source top_counter_10000.tcl -notrace

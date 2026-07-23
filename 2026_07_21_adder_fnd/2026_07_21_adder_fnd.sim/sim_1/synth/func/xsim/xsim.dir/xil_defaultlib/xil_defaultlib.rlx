@@ -1,0 +1,7 @@
+0.7
+2020.2
+Nov 18 2020
+09:47:47
+D:/26ai_camp/2026_07_20_adder_fnd/2026_07_20_adder_fnd.srcs/sources_1/new/fnd_controller.v,1784616266,verilog,,D:/26ai_camp/2026_07_21_adder_fnd/2026_07_21_adder_fnd.srcs/sim_1/new/tb_clkdiv.v,,bcd;clk_div;counter_4;decoder_2x4;digit_spliter;fnd_controller;mux_4x1,,,,,,,,
+D:/26ai_camp/2026_07_21_adder_fnd/2026_07_21_adder_fnd.sim/sim_1/synth/func/xsim/tb_clkdiv_func_synth.v,1784617289,verilog,,D:/26ai_camp/2026_07_20_adder_fnd/2026_07_20_adder_fnd.srcs/sources_1/new/fnd_controller.v,,adder_fnd;glbl,,,,,,,,
+D:/26ai_camp/2026_07_21_adder_fnd/2026_07_21_adder_fnd.srcs/sim_1/new/tb_clkdiv.v,1784617224,verilog,,,,tb_clkdiv,,,,,,,,

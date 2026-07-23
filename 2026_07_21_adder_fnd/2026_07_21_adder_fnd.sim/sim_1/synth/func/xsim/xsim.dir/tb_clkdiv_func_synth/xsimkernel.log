@@ -1,0 +1,4 @@
+Running: xsim.dir/tb_clkdiv_func_synth/xsimk.exe -simmode gui -wdb tb_clkdiv_func_synth.wdb -simrunnum 0 -socket 59096
+Design successfully loaded
+Design Loading Memory Usage: 8784 KB (Peak: 8784 KB)
+Design Loading CPU Usage: 15 ms

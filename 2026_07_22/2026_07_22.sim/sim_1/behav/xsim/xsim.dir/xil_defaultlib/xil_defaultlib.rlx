@@ -1,0 +1,8 @@
+0.7
+2020.2
+Nov 18 2020
+09:47:47
+D:/work/26_AI_COMP_1/2026_07_22/2026_07_22.sim/sim_1/behav/xsim/glbl.v,1605673889,verilog,,,,glbl,,,,,,,,
+D:/work/26_AI_COMP_1/2026_07_22/2026_07_22.srcs/sim_1/new/tb_10000_counter.v,1784776646,verilog,,,,tb_10000_counter,,,,,,,,
+D:/work/26_AI_COMP_1/2026_07_22/2026_07_22.srcs/sources_1/imports/new/fnd_controller.v,1784721067,verilog,,D:/work/26_AI_COMP_1/2026_07_22/2026_07_22.srcs/sim_1/new/tb_10000_counter.v,,bcd;clk_div;counter_4;decoder_2x4;digit_spliter;fnd_controller;mux_4x1,,,,,,,,
+D:/work/26_AI_COMP_1/2026_07_22/2026_07_22.srcs/sources_1/new/counter_10000.v,1784775405,verilog,,D:/work/26_AI_COMP_1/2026_07_22/2026_07_22.srcs/sources_1/imports/new/fnd_controller.v,,count_10000;datapath_10000;tick_gen;top_counter_10000,,,,,,,,

@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Tue Jul 21 21:22:32 2026
+# Process ID: 14676
+# Current directory: D:/work/26_AI_COMP_1/2026_07_21_adder_fnd
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent10184 D:\work\26_AI_COMP_1\2026_07_21_adder_fnd\2026_07_21_adder_fnd.xpr
+# Log file: D:/work/26_AI_COMP_1/2026_07_21_adder_fnd/vivado.log
+# Journal file: D:/work/26_AI_COMP_1/2026_07_21_adder_fnd\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/work/26_AI_COMP_1/2026_07_21_adder_fnd/2026_07_21_adder_fnd.xpr
+update_compile_order -fileset sources_1

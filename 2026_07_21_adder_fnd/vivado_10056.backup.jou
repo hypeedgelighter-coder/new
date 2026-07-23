@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Tue Jul 21 18:40:16 2026
+# Process ID: 10056
+# Current directory: C:/Users/kccistc/Desktop/2026_07_21_adder_fnd
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent4852 C:\Users\kccistc\Desktop\2026_07_21_adder_fnd\2026_07_21_adder_fnd.xpr
+# Log file: C:/Users/kccistc/Desktop/2026_07_21_adder_fnd/vivado.log
+# Journal file: C:/Users/kccistc/Desktop/2026_07_21_adder_fnd\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/kccistc/Desktop/2026_07_21_adder_fnd/2026_07_21_adder_fnd.xpr
