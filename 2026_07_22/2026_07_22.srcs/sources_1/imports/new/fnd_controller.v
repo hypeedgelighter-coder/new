@@ -114,6 +114,23 @@ module decoder_2x4 (
 endmodule
 
 
+
+
+module digit_spliter (
+    input  [13:0] seg_data,
+    output [3:0] digit_1,
+    output [3:0] digit_10,
+    output [3:0] digit_100,
+    output [3:0] digit_1000
+);
+    assign digit_1    = seg_data % 10;
+    assign digit_10   = (seg_data / 10) % 10;
+    assign digit_100  = (seg_data / 100) % 10;
+    assign digit_1000 = (seg_data / 1000) % 10;
+
+endmodule
+
+
 module mux_4x1 (
     input [1:0] sel,   
     input [3:0] digit_1,
@@ -129,19 +146,7 @@ module mux_4x1 (
 
 endmodule
 
-module digit_spliter (
-    input  [13:0] seg_data,
-    output [3:0] digit_1,
-    output [3:0] digit_10,
-    output [3:0] digit_100,
-    output [3:0] digit_1000
-);
-    assign digit_1    = seg_data % 10;
-    assign digit_10   = (seg_data / 10) % 10;
-    assign digit_100  = (seg_data / 100) % 10;
-    assign digit_1000 = (seg_data / 1000) % 10;
 
-endmodule
 
 
 module bcd (

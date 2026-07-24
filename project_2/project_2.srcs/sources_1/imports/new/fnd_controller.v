@@ -2,21 +2,21 @@
 
 
 
-module fnd_controller(
+module fnd_controller (
     input clk,
     input reset,
-    input  [13:0] fnd_in,
-    output [3:0] fnd_com,      
+    input [13:0] fnd_in,
+    output [3:0] fnd_com,
     output [7:0] fnd_data
 );
     wire [3:0] w_digit_1, w_digit_10, w_digit_100, w_digit_1000;
     wire [3:0] w_bcd;
     wire [1:0] w_digit_sel;
-    wire w_1khz;                     
+    wire w_1khz;
 
     decoder_2x4 U_DEC (
         .digit_sel(w_digit_sel),
-        .fnd_com  (fnd_com)    
+        .fnd_com  (fnd_com)
     );
 
     digit_spliter U_DS (
@@ -41,42 +41,42 @@ module fnd_controller(
         .bcd_out(fnd_data)
     );
 
-    clk_div U_CLK_DIV (              
+    clk_div U_CLK_DIV (
         .clk(clk),
         .reset(reset),
         .o_1khz(w_1khz)
     );
 
     counter_4 U_COUNTER_4 (
-        .clk(w_1khz),                 
+        .clk(w_1khz),
         .reset(reset),
         .digit_sel(w_digit_sel)
     );
 
 endmodule
 module clk_div (
-    input   clk,
-    input   reset,
+    input  clk,
+    input  reset,
     output o_1khz
 );
-    reg[15:0] counter_reg;
+    reg [15:0] counter_reg;
     reg clk_reg;
 
     assign o_1khz = clk_reg;
     always @(posedge clk, posedge reset) begin
-        if(reset)begin
-            counter_reg <=0;
-            clk_reg<=1'b0;
+        if (reset) begin
+            counter_reg <= 0;
+            clk_reg <= 1'b0;
         end else begin
-            counter_reg<=counter_reg+1;
-            if(counter_reg==(50000))begin
-                counter_reg<=0;
-                clk_reg<=~clk_reg;
+            counter_reg <= counter_reg + 1;
+            if (counter_reg == (50000)) begin
+                counter_reg <= 0;
+                clk_reg <= ~clk_reg;
             end
 
         end
     end
-    
+
 endmodule
 
 
@@ -90,36 +90,36 @@ module counter_4 (
 
     always @(posedge clk, posedge reset) begin
         if (reset) begin
-            counter_reg <= 0;            
+            counter_reg <= 0;
         end else begin
             counter_reg <= counter_reg + 1;
         end
     end
-    
+
 endmodule
 
-module decoder_2x4 (              
-    input  [1:0] digit_sel,
+module decoder_2x4 (
+    input [1:0] digit_sel,
     output reg [3:0] fnd_com
 );
     always @(digit_sel) begin
-        case (digit_sel)          
-            2'b00: fnd_com = 4'b1110;
-            2'b01: fnd_com = 4'b1101;
-            2'b10: fnd_com = 4'b1011;
-            2'b11: fnd_com = 4'b0111;   
-            default: fnd_com = 4'b1110; 
+        case (digit_sel)
+            2'b00:   fnd_com = 4'b1110;
+            2'b01:   fnd_com = 4'b1101;
+            2'b10:   fnd_com = 4'b1011;
+            2'b11:   fnd_com = 4'b0111;
+            default: fnd_com = 4'b1110;
         endcase
     end
 endmodule
 
 
 module mux_4x1 (
-    input [1:0] sel,   
-    input [3:0] digit_1,
-    input [3:0] digit_10,
-    input [3:0] digit_100,
-    input [3:0] digit_1000,
+    input  [1:0] sel,
+    input  [3:0] digit_1,
+    input  [3:0] digit_10,
+    input  [3:0] digit_100,
+    input  [3:0] digit_1000,
     output [3:0] mux_out
 );
     assign mux_out = (sel==2'b00) ? digit_1:
@@ -131,10 +131,10 @@ endmodule
 
 module digit_spliter (
     input  [13:0] seg_data,
-    output [3:0] digit_1,
-    output [3:0] digit_10,
-    output [3:0] digit_100,
-    output [3:0] digit_1000
+    output [ 3:0] digit_1,
+    output [ 3:0] digit_10,
+    output [ 3:0] digit_100,
+    output [ 3:0] digit_1000
 );
     assign digit_1    = seg_data % 10;
     assign digit_10   = (seg_data / 10) % 10;
@@ -145,7 +145,7 @@ endmodule
 
 
 module bcd (
-    input  [3:0] bcd_in,
+    input [3:0] bcd_in,
     output reg [7:0] bcd_out
 );
 

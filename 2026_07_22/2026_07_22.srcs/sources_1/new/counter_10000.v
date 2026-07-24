@@ -3,20 +3,39 @@
 module top_counter_10000 (
     input clk,
     input reset,
-    input [2:0] sw,
+    input btn_L,
+    input btn_R,
+    input btn_UP,
     output [7:0] fnd_data,
     output [3:0] fnd_com
 );
     wire [13:0] w_counter;
     wire w_reset;
+    wire w_run_stop;
+    wire w_clear;
+    wire w_mode;
 
-    assign w_reset = reset | sw[2];
+
+    assign w_reset = reset | w_clear;
+
+
+    control_unit U_CONTROL_UNIT (
+        .clk(clk),
+        .reset(reset),
+        .i_run_stop(btn_L),
+        .i_clear(btn_R),
+        .i_mode(btn_UP),
+        .o_run_stop(w_run_stop),
+        .o_clear(w_clear),
+        .o_mode(w_mode)
+    );
+
 
     datapath_10000 U_DATAPATH_100000 (
         .clk     (clk),
         .reset   (w_reset),
-        .mode    (sw[0]),
-        .run_stop(sw[1]),
+        .mode    (w_mode),
+        .run_stop(w_run_stop),
         .counter (w_counter)
     );
     fnd_controller U_FND_CNTL (
