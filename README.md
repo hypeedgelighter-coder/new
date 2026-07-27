@@ -1,26 +1,32 @@
-# Verilog 실습 코드 모음
+# new
 
-이 저장소는 26ai_camp에서 진행한 Verilog 실습 코드를 날짜/주제별 폴더로 정리한 것입니다. 각 폴더는 Vivado 프로젝트 전체 또는 핵심 소스 파일만 포함하고 있으며, 아래 표에서 각 폴더의 설계 파일과 테스트벤치를 바로 확인할 수 있습니다.
+26ai_camp 저장소와 병합/정리한 Verilog 학습 프로젝트 모음입니다.
 
-| 폴더 | 설계 파일 | 테스트벤치 | 비고 |
-|---|---|---|---|
-| [2026_07_15_practice](2026_07_15_practice) | practice1.v | sim_practice1.v | 논리 게이트 실습 |
-| [2026_07_16_adder](2026_07_16_adder) | adder.v | tb_adder.v | 4비트 가산기 |
-| [2026_07_16_practice](2026_07_16_practice) | adder_practice.v | tb_adder_practice.v, tb_full_adder.v | 반가산기/전가산기 연습 |
-| [2026_07_20_adder_fnd](2026_07_20_adder_fnd) | fnd_controller.v, adder_practice.v | - | FND 컨트롤러 + 가산기 |
-| [2026_07_20_practice](2026_07_20_practice) | fnd_adder.v | - | FND 가산기 연습 |
-| [2026_07_21_adder_fnd](2026_07_21_adder_fnd) | (Vivado 프로젝트 소스) | tb_clkdiv.v, tb_clkdiv_func_synth.v | 클럭 분주기 |
-| [2026_07_21_new](2026_07_21_new) | fnd_adder.v, fnd_controller.v | tb_fnd_adder.v | FND 가산기 (Vivado 프로젝트) |
-| [2026_07_22](2026_07_22) | control_unit.v, counter_10000.v, fnd_controller.v | tb_10000_counter.v | 10000진 카운터 (Vivado 프로젝트, 최종본) |
-| [2026_07_22_nonblocking](2026_07_22_nonblocking) | nonblocking.v, mux.v | - | Nonblocking 할당 실습 |
-| [2026_07_23_moore_fsm](2026_07_23_moore_fsm) | fsm_moore_led01.v | tb_fsm_moore_led01.v | Moore FSM (LED) |
-| [2026_07_24](2026_07_24) | dd.v | - | 실습 |
-| [2026_7_15_gates](2026_7_15_gates) | gates.v | tb_gates.v | 논리 게이트 (26ai_camp 버전으로 교체됨) |
-| [practice_2](practice_2) | 1.v, a.v, fnd_controller.v | - | 연습 |
-| [project_1](project_1) | 202.v | - | 연습 |
-| [project_2](project_2) | counter_10000.v, fnd_controller.v | - | 10000진 카운터 (Vivado 프로젝트) |
-| [project_3](project_3) | fnd_conroller.v | - | FND 컨트롤러 연습 |
-| [project_7_17_multiply](project_7_17_multiply) | multiply.v | tb_multiply.v | 곱셈기 |
-| [drafts](drafts) | top_counter_10000_draft.v, 내가_혼자해본거_망함_ㅜㅜ.v, 하다만거.v | tb_10000_counter_draft.v | 26ai_camp에 있던 초안/미완성 코드 (2026_07_22 최종본 이전 버전) |
+## 폴더 안내
 
-> drafts 폴더는 26ai_camp 저장소 루트에 있던 확장자 없는 초안 파일들에 `.v` 확장자를 붙여 옮긴 것으로, 코드 내용은 원본 그대로입니다.
+아래 목록은 날짜순으로 정리되어 있으며, 각 폴더에는 해당 프로젝트의 **Verilog 소스/테스트벤치 파일만** 모아두었습니다 (Vivado 프로젝트 부속 파일 제외).
+
+| 폴더 | 파일 | 비고 |
+|---|---|---|
+| [01_project_1](./01_project_1) | [202.v](./01_project_1/202.v) | 초기 연습 |
+| [02_project_2](./02_project_2) | [counter_10000.v](./02_project_2/counter_10000.v), [fnd_controller.v](./02_project_2/fnd_controller.v) | 초기 연습 |
+| [03_project_3](./03_project_3) | [fnd_conroller.v](./03_project_3/fnd_conroller.v) | 초기 연습 |
+| [04_practice_2](./04_practice_2) | [1.v](./04_practice_2/1.v), [a.v](./04_practice_2/a.v), [fnd_controller.v](./04_practice_2/fnd_controller.v) | 초기 연습 |
+| [05_2026-07-15_practice](./05_2026-07-15_practice) | [practice1.v](./05_2026-07-15_practice/practice1.v), [sim_practice1.v](./05_2026-07-15_practice/sim_practice1.v) | 7/15 practice |
+| [06_2026-07-15_gates](./06_2026-07-15_gates) | [gates.v](./06_2026-07-15_gates/gates.v), [tb_gates.v](./06_2026-07-15_gates/tb_gates.v) | 7/15 논리게이트 |
+| [07_2026-07-16_practice](./07_2026-07-16_practice) | [adder_practice.v](./07_2026-07-16_practice/adder_practice.v), [tb_adder_practice.v](./07_2026-07-16_practice/tb_adder_practice.v), [tb_full_adder.v](./07_2026-07-16_practice/tb_full_adder.v) | 7/16 practice |
+| [08_2026-07-16_adder](./08_2026-07-16_adder) | [adder.v](./08_2026-07-16_adder/adder.v), [tb_adder.v](./08_2026-07-16_adder/tb_adder.v) | 7/16 adder |
+| [09_2026-07-17_multiply](./09_2026-07-17_multiply) | [multiply.v](./09_2026-07-17_multiply/multiply.v), [tb_multiply.v](./09_2026-07-17_multiply/tb_multiply.v) | 7/17 multiply |
+| [10_2026-07-20_practice](./10_2026-07-20_practice) | [fnd_adder.v](./10_2026-07-20_practice/fnd_adder.v) | 7/20 practice |
+| [11_2026-07-20_adder_fnd](./11_2026-07-20_adder_fnd) | [adder_practice.v](./11_2026-07-20_adder_fnd/adder_practice.v), [fnd_controller.v](./11_2026-07-20_adder_fnd/fnd_controller.v) | 7/20 adder+fnd |
+| [12_2026-07-21_adder_fnd](./12_2026-07-21_adder_fnd) | [tb_clkdiv.v](./12_2026-07-21_adder_fnd/tb_clkdiv.v) | 7/21 clkdiv |
+| [13_2026-07-21_new](./13_2026-07-21_new) | [fnd_adder.v](./13_2026-07-21_new/fnd_adder.v), [fnd_controller.v](./13_2026-07-21_new/fnd_controller.v), [tb_fnd_adder.v](./13_2026-07-21_new/tb_fnd_adder.v) | 7/21 fnd_adder |
+| [14_2026-07-22](./14_2026-07-22) | [control_unit.v](./14_2026-07-22/control_unit.v), [counter_10000.v](./14_2026-07-22/counter_10000.v), [fnd_controller.v](./14_2026-07-22/fnd_controller.v), [tb_10000_counter.v](./14_2026-07-22/tb_10000_counter.v) | 7/22 10000 counter |
+| [15_2026-07-22_nonblocking](./15_2026-07-22_nonblocking) | [mux.v](./15_2026-07-22_nonblocking/mux.v), [nonblocking.v](./15_2026-07-22_nonblocking/nonblocking.v) | 7/22 nonblocking |
+| [16_2026-07-23_moore_fsm](./16_2026-07-23_moore_fsm) | [fsm_moore_led01.v](./16_2026-07-23_moore_fsm/fsm_moore_led01.v), [tb_fsm_moore_led01.v](./16_2026-07-23_moore_fsm/tb_fsm_moore_led01.v) | 7/23 moore FSM |
+| [17_2026-07-24](./17_2026-07-24) | [dd.v](./17_2026-07-24/dd.v) | 7/24 |
+| [18_drafts](./18_drafts) | [top_counter_10000_draft.v](./18_drafts/top_counter_10000_draft.v), [tb_10000_counter_draft.v](./18_drafts/tb_10000_counter_draft.v), [내가_혼자해본거_망함_ㅜㅜ.v](./18_drafts/%EB%82%B4%EA%B0%80_%ED%98%BC%EC%9E%90%ED%95%B4%EB%B3%B8%EA%B1%B0_%EB%A7%9D%ED%95%A8_%E3%85%9C%E3%85%9C.v), [하다만거.v](./18_drafts/%ED%95%98%EB%8B%A4%EB%A7%8C%EA%B1%B0.v) | 미완성 draft 코드 모음 |
+
+## 원본 Vivado 프로젝트
+
+위 정리된 폴더들의 원본 Vivado 프로젝트 폴더(빌드 산출물 포함)는 저장소 하단에 원래 이름 그대로 보존되어 있습니다 (예: `2026_07_22`, `2026_7_15_gates`, `practice_2` 등). 코드 내용은 위 정리 폴더와 동일하며, 삭제하지 않고 그대로 남겨두었습니다.
