@@ -26,6 +26,7 @@
 | [16_2026-07-23_moore_fsm](./16_2026-07-23_moore_fsm) | [fsm_moore_led01.v](./16_2026-07-23_moore_fsm/fsm_moore_led01.v), [tb_fsm_moore_led01.v](./16_2026-07-23_moore_fsm/tb_fsm_moore_led01.v) | 7/23 moore FSM |
 | [17_2026-07-24](./17_2026-07-24) | [dd.v](./17_2026-07-24/dd.v) | 7/24 |
 | [18_drafts](./18_drafts) | [top_counter_10000_draft.v](./18_drafts/top_counter_10000_draft.v), [tb_10000_counter_draft.v](./18_drafts/tb_10000_counter_draft.v), [내가_혼자해본거_망함_ㅜㅜ.v](./18_drafts/%EB%82%B4%EA%B0%80_%ED%98%BC%EC%9E%90%ED%95%B4%EB%B3%B8%EA%B1%B0_%EB%A7%9D%ED%95%A8_%E3%85%9C%E3%85%9C.v), [하다만거.v](./18_drafts/%ED%95%98%EB%8B%A4%EB%A7%8C%EA%B1%B0.v) | 미완성 draft 코드 모음 |
+| [19_2026-08-13_sr04](./19_2026-08-13_sr04) | [sr04_controller.v](./19_2026-08-13_sr04/sr04_controller.v), [fnd_controller.v](./19_2026-08-13_sr04/fnd_controller.v), [btn_debounce.v](./19_2026-08-13_sr04/btn_debounce.v), [top_sr04.v](./19_2026-08-13_sr04/top_sr04.v), [tb_sr04.v](./19_2026-08-13_sr04/tb_sr04.v) | 8/13 HC-SR04 초음파거리센서 + FND 출력 |
 
 ## 원본 Vivado 프로젝트
 
