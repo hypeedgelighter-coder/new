@@ -1,7 +1,6 @@
 `timescale 1ns / 1ps
 
-
-module gates(
+module practice1(
     input a,
     input b,
     output y0,
@@ -14,6 +13,7 @@ module gates(
 
 
     );
+
     assign y0=a&b;
     assign y1=~(a&b);
     assign y2=a|b;
