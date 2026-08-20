@@ -12,3 +12,4 @@
 **/*.cache/
 **/*.hw/
 **/*.ip_user_files/
+vivado_pid*.str
