@@ -13,3 +13,18 @@
 **/*.hw/
 **/*.ip_user_files/
 vivado_pid*.str
+
+# 빌드/실행 산출물 및 임시 파일 (소스만 추적)
+*.zip
+*.sdb
+*.rpt
+*.mem
+*.str
+*.wdf
+/tmp/
+/output/
+/xsim.dir/
+xvlog.pb
+.tmp_uv_python/
+**/*.gen/
+**/*.ip_user_files/
