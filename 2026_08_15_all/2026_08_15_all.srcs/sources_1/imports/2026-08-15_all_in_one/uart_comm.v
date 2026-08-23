@@ -50,6 +50,7 @@ module uart_comm #(
 
     //--------- 송신 : 현재 표시값 ---------
     input [1:0] mode_sel,
+    input       disp_mode,    // sw[0] : 시간을 SS.mm 로 낼지 HH:MM 로 낼지
     input [6:0] msec,
     input [5:0] sec,
     input [5:0] min,
@@ -147,6 +148,7 @@ module uart_comm #(
         .clk        (clk),
         .reset      (reset),
         .mode_sel   (mode_sel),
+        .disp_mode  (disp_mode),
         .msec       (msec),
         .sec        (sec),
         .min        (min),

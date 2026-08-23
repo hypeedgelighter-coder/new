@@ -17,7 +17,6 @@
 //                     +------------------------------------+|
 //                                                           v
 //                                        [FND_DISPLAY] --> FND
-//                                        [LED_STATUS]  --> LED
 //
 //  블록 구성
 //    btn_unit.v      : btn_debounce x4
@@ -26,10 +25,14 @@
 //    time_datapath.v : stopwatch_datapath + watch_datapath + 표시 선택
 //    sensor_unit.v   : sr04_controller + dht11_controller + 값 래치
 //    fnd_display.v   : 자리수 분리 + 모드 MUX + fnd_controller
-//    led_status.v    : LED 표시 (조합)
+//
+//  LED : 뺐다. led_status.v 는 프로젝트에 남아 있지만 어디서도 인스턴스
+//        하지 않는다. 되살리려면 top 에 output [7:0] led 포트를 다시 만들고
+//        top.xdc 의 LED 핀 제약 주석을 푼다.
 //
 //  스위치 배치 (보드 정면 기준 오른쪽 끝이 sw[0], 왼쪽으로 갈수록 번호 증가)
 //    sw[0] 오른쪽 1번째 = 자릿수 표시모드 (0 = SS.mm 초.밀리초 / 1 = HH.MM 시.분)
+//                         FND 뿐 아니라 UART 로 나가는 시간 문자열도 같이 바뀐다
 //    sw[1] 오른쪽 2번째 = 시계
 //    sw[2] 오른쪽 3번째 = SR04(거리)
 //    sw[3] 오른쪽 4번째 = DHT11(온습도)
@@ -80,9 +83,7 @@ module top #(
 
     // FND
     output [3:0] fnd_com,
-    output [7:0] fnd_data,
-
-    output [7:0] led
+    output [7:0] fnd_data
 );
 
     // BTNC asserts reset immediately.  Deassertion is synchronized to the
@@ -119,12 +120,11 @@ module top #(
     wire [5:0] w_min;
     wire [4:0] w_hour;
 
-    // SENSOR_UNIT -> FND_DISPLAY / UART_COMM / LED_STATUS
+    // SENSOR_UNIT -> FND_DISPLAY / UART_COMM
     wire [8:0] w_distance;
     wire w_sr04_done, w_sr04_valid;
     wire [7:0] w_humi, w_temp;
     wire w_dht_done, w_dht_valid;
-    wire [5:0] w_dht_dbg;
 
     //=================================================================
     // 1) 버튼 디바운스
@@ -174,6 +174,7 @@ module top #(
         .cmd_start(u_start),
 
         .mode_sel   (w_mode_sel),
+        .disp_mode  (w_disp_mode),
         .msec       (w_msec),
         .sec        (w_sec),
         .min        (w_min),
@@ -268,7 +269,7 @@ module top #(
         .temperature (w_temp),
         .dht_done    (w_dht_done),
         .dht_valid   (w_dht_valid),
-        .dht_dbg_step(w_dht_dbg)
+        .dht_dbg_step()          // LED 진단 표시 전용이었다. LED 를 빼서 미연결.
     );
 
     //=================================================================
@@ -290,19 +291,6 @@ module top #(
         .temperature(w_temp),
         .fnd_com    (fnd_com),
         .fnd_data   (fnd_data)
-    );
-
-    //=================================================================
-    // 7) LED 상태 표시
-    //=================================================================
-    led_status U_LED_STATUS (
-        .mode_sel    (w_mode_sel),
-        .wt_edit_sel (w_wt_edit_sel),
-        .sw_run_stop (w_sw_run_stop),
-        .sr04_valid  (w_sr04_valid),
-        .dht_valid   (w_dht_valid),
-        .dht_dbg_step(w_dht_dbg),
-        .led         (led)
     );
 
 endmodule

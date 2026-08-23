@@ -76,14 +76,12 @@ module dht11_controller #(
     wire [7:0] checksum_calc = data_reg[39:32] + data_reg[31:24] +
                                data_reg[23:16] + data_reg[15:8];
 
-    tick_gen_1us #(
+    dht_tick_1us #(
         .F_COUNT(TICK_1US)
     ) U_TICK_GEN_1US (
-        .clk     (clk),
-        .reset   (reset),
-        .run_stop(1'b1),
-        .clear   (1'b0),
-        .o_tick  (tick_us)
+        .clk   (clk),
+        .reset (reset),
+        .o_tick(tick_us)
     );
 
     // True open-drain behavior: never drive a logic High onto the DHT bus.
@@ -300,4 +298,36 @@ module dht11_controller #(
         endcase
     end
 
+endmodule
+
+
+//---------------------------------------------------------------------
+// dht11_controller 전용 1us tick.
+//   [기존] 공용 tick_gen_1us 를 run_stop=1, clear=0 으로 묶어서 썼다.
+//   [변경] 여기서는 항상 자유 구동이라 그 두 포트를 아예 뺐다.
+//          (sr04 쪽은 위상 리셋이 필요해서 run_stop/clear 를 유지한다)
+//---------------------------------------------------------------------
+module dht_tick_1us #(
+    parameter F_COUNT = 100  // 100MHz -> 1us
+) (
+    input      clk,
+    input      reset,
+    output reg o_tick
+);
+    reg [$clog2(F_COUNT)-1:0] clk_counter;
+
+    always @(posedge clk, posedge reset) begin
+        if (reset) begin
+            clk_counter <= 0;
+            o_tick      <= 1'b0;
+        end else begin
+            o_tick <= 1'b0;
+            if (clk_counter == (F_COUNT - 1)) begin
+                clk_counter <= 0;
+                o_tick      <= 1'b1;
+            end else begin
+                clk_counter <= clk_counter + 1;
+            end
+        end
+    end
 endmodule

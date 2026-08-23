@@ -64,7 +64,6 @@ module tb_top ();
     wire       dht11_io;
     wire [3:0] fnd_com;
     wire [7:0] fnd_data;
-    wire [7:0] led;
 
     top #(
         .SYS_CLK(P_SYS_CLK),
@@ -88,8 +87,7 @@ module tb_top ();
         .trigger (trigger),
         .dht11_io(dht11_io),
         .fnd_com (fnd_com),
-        .fnd_data(fnd_data),
-        .led     (led)
+        .fnd_data(fnd_data)
     );
 
     //-----------------------------------------------------------------
@@ -305,9 +303,18 @@ module tb_top ();
             $display("  ** FAIL : run_stop 이 1 이 아님");
         end else $display("  OK : run_stop = 1 (카운트 시작)");
 
-        // 자동 송신이 없어졌으므로 PC 가 'g' 로 요청해야 한 줄 나온다
+        // 자동 송신이 없어졌으므로 PC 가 'g' 로 요청해야 한 줄 나온다.
+        // sw[0]=0 이므로 "SS.mm" 이 나와야 한다.
         uart_send("g");
         repeat (P_TX_WAIT) @(posedge clk);
+
+        // sw[0] 을 올리면 같은 'g' 에 "HH:MM" 이 나온다 (모드는 그대로 스톱워치)
+        sw = 4'b0001;
+        repeat (200) @(posedge clk);
+        uart_send("g");
+        repeat (P_TX_WAIT) @(posedge clk);
+        sw = 4'b0000;
+        repeat (200) @(posedge clk);
 
         uart_send("s");
         repeat (200) @(posedge clk);

@@ -49,7 +49,7 @@ module sr04_controller #(
         (us_count_reg * 16'd1130) + 32'd32768;
     wire [8:0] distance_calc = distance_scaled[24:16];
 
-    tick_gen_1us #(
+    sr04_tick_1us #(
         .F_COUNT(TICK_1US)
     ) U_TICK_GEN_1US (
         .clk     (clk),
@@ -165,4 +165,41 @@ module sr04_controller #(
         endcase
     end
 
+endmodule
+
+
+//---------------------------------------------------------------------
+// sr04_controller 전용 1us tick.
+//   IDLE 에서 clear 로 분주 위상을 리셋한다. 자유 구동으로 두면 trigger
+//   펄스가 최소 10us 보다 짧아질 수 있다.
+//   [기존] tick_gen.v 의 공용 tick_gen_1us 를 dht11 과 같이 썼다.
+//   [변경] 이 파일 안에서 자급자족한다. 이름이 겹치면 안 되므로 sr04_ 접두.
+//---------------------------------------------------------------------
+module sr04_tick_1us #(
+    parameter F_COUNT = 100  // 100MHz -> 1us
+) (
+    input      clk,
+    input      reset,
+    input      run_stop,
+    input      clear,
+    output reg o_tick
+);
+    reg [$clog2(F_COUNT)-1:0] clk_counter;
+
+    always @(posedge clk, posedge reset) begin
+        if (reset || clear) begin
+            clk_counter <= 0;
+            o_tick      <= 1'b0;
+        end else begin
+            o_tick <= 1'b0;
+            if (run_stop) begin
+                if (clk_counter == (F_COUNT - 1)) begin
+                    clk_counter <= 0;
+                    o_tick      <= 1'b1;
+                end else begin
+                    clk_counter <= clk_counter + 1;
+                end
+            end
+        end
+    end
 endmodule
