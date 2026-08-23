@@ -42,7 +42,8 @@
 //    센서     : L=1회 측정 (자동 주기 측정 없음. 누를 때마다 한 번씩)
 //
 //  UART 명령 : ascii_decoder.v 상단 주석 참고
-//  UART 송신 : 1초마다 + 센서 측정 완료마다 현재 모드 값을 문자열로
+//  UART 송신 : PC 가 'g' 로 요청할 때 + 센서 측정 완료마다 현재 모드 값을
+//              문자열로 (1초 주기 자동송신 없음)
 //=====================================================================
 // 아래 파라미터는 전부 100MHz 실보드 기준 값이다.
 // 시뮬레이션에서는 top #(...) 로 확 줄여서 인스턴스하면 빨리 돈다.
@@ -54,8 +55,7 @@ module top #(
     parameter FND_SCAN_CNT = 100_000,  // FND 자리 스캔 1kHz
     parameter TICK_100HZ = 1_000_000,  // 스톱워치/시계 10ms
     parameter TICK_1US = 100,  // 센서 1us
-    parameter DHT_GUARD_US = 1_000_000,    // 전원 안정화/최소 측정 간격 1s
-    parameter SEND_PERIOD = 100_000_000  // UART 자동송신 1s
+    parameter DHT_GUARD_US = 1_000_000     // 전원 안정화/최소 측정 간격 1s
 ) (
     input clk,
     input reset,
@@ -147,12 +147,12 @@ module top #(
     //=================================================================
     // 2) UART 통신 (UART+FIFO / ASCII Decoder / ASCII Sender)
     //     수신 : PC 문자 -> 명령 펄스 u_* -> Control Unit
-    //     송신 : 1초마다 + 센서 측정 완료마다 현재 모드 값을 문자열로
+    //     송신 : PC 가 'g' 로 요청할 때 + 센서 측정 완료마다 현재 모드 값을
+    //            문자열로 (주기 자동송신 제거)
     //=================================================================
     uart_comm #(
-        .SYS_CLK    (SYS_CLK),
-        .BAUD       (BAUD),
-        .SEND_PERIOD(SEND_PERIOD)
+        .SYS_CLK(SYS_CLK),
+        .BAUD   (BAUD)
     ) U_UART_COMM (
         .clk  (clk),
         .reset(w_reset),

@@ -9,7 +9,7 @@
 //
 //  검사 항목
 //   1) UART RX -> ASCII Decoder -> Control Unit -> 스톱워치 run/stop
-//   2) ASCII Sender -> TX FIFO -> UART TX 로 나가는 문자열 (콘솔 출력)
+//   2) 'g' 요청 -> ASCII Sender -> TX FIFO -> UART TX 문자열 (콘솔 출력)
 //   3) SR04 : trigger 발생 -> echo 응답 -> 거리 계산 -> "DIST xxxcm"
 //   4) DHT11 : 1-wire 프레임 수신 -> 체크섬 통과 -> "H xx% T xxC"
 //=====================================================================
@@ -45,7 +45,9 @@ module tb_top ();
     localparam integer P_FND_SCAN = 50;
     localparam integer P_TICK_100HZ = 200;
     localparam integer P_TICK_1US = 4;  // "1us" = 4 clk
-    localparam integer P_SEND_PERIOD = 50_000;
+    // 한 줄(최대 13바이트)이 다 나갈 때까지 기다리는 시간.
+    // 13 * 10bit * P_BIT_CLKS(160) = 20800 clk 이므로 50_000 이면 넉넉하다.
+    localparam integer P_TX_WAIT = 50_000;
 
     // 실패 개수. 검사에서 실패할 때마다 올리고 맨 끝에 한 줄로 요약한다.
     // (tb/ 폴더의 다른 테스트벤치와 같은 형식으로 맞춘 것)
@@ -71,8 +73,7 @@ module tb_top ();
         .FND_SCAN_CNT(P_FND_SCAN),
         .TICK_100HZ(P_TICK_100HZ),
         .TICK_1US(P_TICK_1US),
-        .DHT_GUARD_US(0),  // 기능 시뮬레이션에서는 1초 보호 대기 생략
-        .SEND_PERIOD(P_SEND_PERIOD)
+        .DHT_GUARD_US(0)  // 기능 시뮬레이션에서는 1초 보호 대기 생략
     ) DUT (
         .clk     (clk),
         .reset   (reset),
@@ -304,8 +305,9 @@ module tb_top ();
             $display("  ** FAIL : run_stop 이 1 이 아님");
         end else $display("  OK : run_stop = 1 (카운트 시작)");
 
-        repeat (P_SEND_PERIOD + 30000)
-        @(posedge clk);  // 자동 송신 한 번 받기
+        // 자동 송신이 없어졌으므로 PC 가 'g' 로 요청해야 한 줄 나온다
+        uart_send("g");
+        repeat (P_TX_WAIT) @(posedge clk);
 
         uart_send("s");
         repeat (200) @(posedge clk);
@@ -384,7 +386,8 @@ module tb_top ();
                 "  OK : stuck-high echo rejected (not displayed as 400 cm)"
             );
         sr04_stuck_high = 1'b0;
-        repeat (P_SEND_PERIOD) @(posedge clk);
+        uart_send("g");  // "DIST xxxcm" 한 줄 요청
+        repeat (P_TX_WAIT) @(posedge clk);
 `endif
 
 `ifdef RUN_DHT11
@@ -425,7 +428,8 @@ module tb_top ();
         end else $display("  OK : BTNC/global reset clears DHT11");
         reset = 1'b0;
         repeat (10) @(posedge clk);
-        repeat (P_SEND_PERIOD + 30000) @(posedge clk);
+        uart_send("g");  // "H xx% T xxC" 한 줄 요청
+        repeat (P_TX_WAIT) @(posedge clk);
 `endif
 
         $display("\n=====================================================");

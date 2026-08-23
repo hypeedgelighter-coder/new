@@ -19,6 +19,8 @@
 //   L : LEFT (편집자리 왼쪽)  R : RIGHT (편집자리 오른쪽)
 //   S : 초 편집 선택          M : 분 편집 선택        H : 시 편집 선택
 //   t : 센서 수동 측정 시작 (SR04 / DHT11)
+//   g : 현재 모드 값 1회 전송 요청 (GET). 'G' 도 같이 받는다.
+//       이것만 Control Unit 이 아니라 ascii_sender 의 send_start 로 간다.
 //=====================================================================
 module ascii_decoder (
     input clk,
@@ -39,7 +41,8 @@ module ascii_decoder (
     output reg cmd_sel_s,
     output reg cmd_sel_m,
     output reg cmd_sel_h,
-    output reg cmd_start
+    output reg cmd_start,
+    output reg cmd_get     // 'g' : ascii_sender 로 가는 송신 요청 펄스
 );
 
     reg pop_reg;
@@ -60,6 +63,7 @@ module ascii_decoder (
             cmd_sel_m <= 1'b0;
             cmd_sel_h <= 1'b0;
             cmd_start <= 1'b0;
+            cmd_get   <= 1'b0;
         end else begin
             // 기본값 0 : 매 클럭 클리어하고, 이번에 히트한 것만 1클럭 1
             pop_reg   <= 1'b0;
@@ -75,6 +79,7 @@ module ascii_decoder (
             cmd_sel_m <= 1'b0;
             cmd_sel_h <= 1'b0;
             cmd_start <= 1'b0;
+            cmd_get   <= 1'b0;
 
             // pop_reg 가 1인 사이클은 이미 꺼낸 바이트를 처리 중이므로 건너뛴다
             // (한 바이트당 2클럭. 9600bps 대비 압도적으로 빠르다)
@@ -93,6 +98,8 @@ module ascii_decoder (
                     "M": cmd_sel_m <= 1'b1;
                     "H": cmd_sel_h <= 1'b1;
                     "t": cmd_start <= 1'b1;
+                    // 값 전송 요청. 대소문자 둘 다 받는다 (터미널에서 편하라고)
+                    "g", "G": cmd_get <= 1'b1;
                     default:
                     ;  // 매핑 안 된 문자(개행 등)는 버린다
                 endcase
