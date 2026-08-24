@@ -28,3 +28,6 @@ xvlog.pb
 .tmp_uv_python/
 **/*.gen/
 **/*.ip_user_files/
+
+# ILA 원본 덤프 (용량 커서 제외, 결과는 MEASUREMENT.md 참조)
+2026_08_24_btn_debounce/*.csv
