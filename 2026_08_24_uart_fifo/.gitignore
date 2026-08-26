@@ -1,0 +1,10 @@
+sim_work/
+*.xpr
+*.cache/
+*.hw/
+*.ip_user_files/
+*.sim/
+*.srcs/
+.Xil/
+vivado*.jou
+vivado*.log
