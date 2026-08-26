@@ -1,7 +1,0 @@
-Running: xsim.dir/nonblocking_behav/xsimk.exe -simmode gui -wdb nonblocking_behav.wdb -simrunnum 0 -socket 56070
-Design successfully loaded
-Design Loading Memory Usage: 8000 KB (Peak: 8000 KB)
-Design Loading CPU Usage: 15 ms
-Simulation completed
-Simulation Memory Usage: 8740 KB (Peak: 8740 KB)
-Simulation CPU Usage: 15 ms

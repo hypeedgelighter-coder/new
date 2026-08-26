@@ -31,3 +31,15 @@ xvlog.pb
 
 # ILA 원본 덤프 (용량 커서 제외, 결과는 MEASUREMENT.md 참조)
 2026_08_24_btn_debounce/*.csv
+
+# 스크립트가 만든 임시 툴체인 (uv / node / venv). 소스 아님.
+.tmp_nodeenv/
+.tmp_uv_cache/
+.tmp_uvm_pdf_venv/
+
+# 데이터시트 PDF 를 페이지 이미지로 뽑아둔 것 (원본 PDF 로 다시 만들면 됨)
+**/tmp/pdfs/
+
+# 손으로 남긴 백업본
+*.bak
+*.bak[0-9]*

@@ -1,7 +1,0 @@
-Running: xsim.dir/fsm_moore_led01_behav/xsimk.exe -simmode gui -wdb fsm_moore_led01_behav.wdb -simrunnum 0 -socket 52538
-Design successfully loaded
-Design Loading Memory Usage: 8804 KB (Peak: 8804 KB)
-Design Loading CPU Usage: 15 ms
-Simulation completed
-Simulation Memory Usage: 9588 KB (Peak: 9588 KB)
-Simulation CPU Usage: 15 ms
