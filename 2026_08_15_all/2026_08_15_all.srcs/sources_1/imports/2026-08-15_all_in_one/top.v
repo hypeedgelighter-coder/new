@@ -53,7 +53,7 @@
 // (tb_top.v 참고)
 module top #(
     parameter SYS_CLK = 100_000_000,
-    parameter BAUD = 9600,
+    parameter BAUD = 9600,              // [실험] 원래 9600. 한 바이트 33.3ms, 한 줄 233ms.
     parameter DEBOUNCE_CNT = 100_000,  // 버튼 샘플 1ms
     parameter FND_SCAN_CNT = 100_000,  // FND 자리 스캔 1kHz
     parameter TICK_100HZ = 1_000_000,  // 스톱워치/시계 10ms
@@ -263,12 +263,12 @@ module top #(
         .sr04_done (w_sr04_done),
         .sr04_valid(w_sr04_valid),
 
-        .dht_start   (w_dht_start),
-        .dht11_io    (dht11_io),
-        .humidity    (w_humi),
-        .temperature (w_temp),
-        .dht_done    (w_dht_done),
-        .dht_valid   (w_dht_valid),
+        .dht_start(w_dht_start),
+        .dht11_io(dht11_io),
+        .humidity(w_humi),
+        .temperature(w_temp),
+        .dht_done(w_dht_done),
+        .dht_valid(w_dht_valid),
         .dht_dbg_step()          // LED 진단 표시 전용이었다. LED 를 빼서 미연결.
     );
 

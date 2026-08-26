@@ -10,7 +10,7 @@
 //  검사 항목
 //   1) UART RX -> ASCII Decoder -> Control Unit -> 스톱워치 run/stop
 //   2) 'g' 요청 -> ASCII Sender -> TX FIFO -> UART TX 문자열 (콘솔 출력)
-//   3) SR04 : trigger 발생 -> echo 응답 -> 거리 계산 -> "DIST xxxcm"
+//   3) SR04 : trigger 발생 -> echo 응답 -> 거리 계산 -> "xxx" 숫자만
 //   4) DHT11 : 1-wire 프레임 수신 -> 체크섬 통과 -> "H xx% T xxC"
 //=====================================================================
 
@@ -393,7 +393,7 @@ module tb_top ();
                 "  OK : stuck-high echo rejected (not displayed as 400 cm)"
             );
         sr04_stuck_high = 1'b0;
-        uart_send("g");  // "DIST xxxcm" 한 줄 요청
+        uart_send("g");  // "xxx" 거리 한 줄 요청
         repeat (P_TX_WAIT) @(posedge clk);
 `endif
 

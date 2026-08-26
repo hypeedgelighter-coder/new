@@ -7,12 +7,15 @@
 //   내부 포인터 제어 모듈 이름이 control_unit 이었다. 다이어그램의
 //   최상위 Control Unit 과 이름이 겹쳐서 한 프로젝트에 못 넣는다.
 //   -> fifo_control_unit 으로 이름 변경.
-//   깊이도 파라미터(AWIDTH)로 뺐다. ASCII Sender 가 13바이트짜리
-//   문자열을 밀어넣기 때문에 TX FIFO 는 4단(기존)으로는 계속 full 이
-//   걸린다. 16단(AWIDTH=4)으로 쓴다.
+//   깊이도 파라미터(AWIDTH)로 뺐다. ASCII Sender 가 한 번에 최대 7바이트
+//   (STOPWATCH/WATCH "SS.mm\r\n" / "HH:MM\r\n", DHT11 "HH TT\r\n".
+//   SR04 만 "DDD\r\n" 5바이트) 를 밀어넣기 때문에 TX FIFO 는 4단(기존)
+//   으로는 계속 full 이 걸린다. full/empty 를 별도 플래그로 두어
+//   2**AWIDTH 칸을 전부 쓰므로, 7바이트가 한 번에 들어가는 최소 깊이인
+//   8단(AWIDTH=3)으로 쓴다.
 //=====================================================================
 module fifo #(
-    parameter AWIDTH = 4,  // 주소폭 -> 깊이 = 2**AWIDTH
+    parameter AWIDTH = 3,  // 주소폭 -> 깊이 = 2**AWIDTH
     parameter DWIDTH = 8
 ) (
     input               clk,
@@ -54,7 +57,7 @@ endmodule
 
 
 module register_file #(
-    parameter AWIDTH = 4,
+    parameter AWIDTH = 3,
     parameter DWIDTH = 8
 ) (
     input               clk,
@@ -77,7 +80,7 @@ endmodule
 
 
 module fifo_control_unit #(
-    parameter AWIDTH = 4
+    parameter AWIDTH = 3
 ) (
     input               clk,
     input               reset,

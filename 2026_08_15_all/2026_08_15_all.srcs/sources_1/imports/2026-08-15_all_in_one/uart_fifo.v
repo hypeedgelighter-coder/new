@@ -16,7 +16,7 @@
 module uart_fifo #(
     parameter SYS_CLK = 100_000_000,
     parameter BAUD    = 9600,
-    parameter AWIDTH  = 4       // FIFO 깊이 2**4 = 16
+    parameter AWIDTH  = 3       // FIFO 깊이 2**3 = 8
 ) (
     input        clk,
     input        reset,

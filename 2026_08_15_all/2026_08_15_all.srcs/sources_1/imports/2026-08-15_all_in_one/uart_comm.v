@@ -24,7 +24,7 @@
 module uart_comm #(
     parameter SYS_CLK = 100_000_000,
     parameter BAUD    = 9600,
-    parameter AWIDTH  = 4             // FIFO 깊이 2**4 = 16
+    parameter AWIDTH  = 3             // FIFO 깊이 2**3 = 8
 ) (
     input clk,
     input reset,
@@ -50,13 +50,13 @@ module uart_comm #(
 
     //--------- 송신 : 현재 표시값 ---------
     input [1:0] mode_sel,
-    input       disp_mode,    // sw[0] : 시간을 SS.mm 로 낼지 HH:MM 로 낼지
+    input disp_mode,  // sw[0] : 시간을 SS.mm 로 낼지 HH:MM 로 낼지
     input [6:0] msec,
     input [5:0] sec,
     input [5:0] min,
     input [4:0] hour,
     input [8:0] distance,
-    input [7:0] humidity,     // 정수부
+    input [7:0] humidity,  // 정수부
     input [7:0] temperature,  // 정수부
 
     //--------- 송신 타이밍 : 센서 측정 완료 ---------
@@ -71,10 +71,10 @@ module uart_comm #(
 
     // 여기서부터는 전부 내부 배선. 밖으로 나가지 않는다.
     wire [7:0] w_rx_data;
-    wire       w_rx_empty, w_rx_pop;
+    wire w_rx_empty, w_rx_pop;
     wire [7:0] w_tx_data;
-    wire       w_tx_push, w_tx_full;
-    wire       w_cmd_get;  // PC 가 보낸 'g' -> 한 줄 전송 요청 펄스
+    wire w_tx_push, w_tx_full;
+    wire w_cmd_get;  // PC 가 보낸 'g' -> 한 줄 전송 요청 펄스
 
     uart_fifo #(
         .SYS_CLK(SYS_CLK),
