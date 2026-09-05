@@ -1,0 +1,2 @@
+# Makefile recipes break on Linux if checked out with CRLF
+Makefile text eol=lf
