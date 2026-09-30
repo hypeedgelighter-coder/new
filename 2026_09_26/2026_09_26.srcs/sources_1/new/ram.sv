@@ -3,21 +3,26 @@
 
 
 module ram (
-    input clk,
-    input mem,
-    input [31:0] ram_waddr,
-    input [31:0] ram_wdata,
-    input [31:0] ram_raddr,
-    output [31:0] ram_rdata
+    input logic clk,
+    input logic mem,
+    input logic [31:0] ram_waddr,
+    input logic [31:0] ram_wdata,
+    input logic [31:0] ram_raddr,
+    output logic [31:0] ram_rdata
 );
     logic [31:0] ram_file[0:256];
 
+
     always_ff @(posedge clk) begin
-        if (mem) ram_file[ram_waddr] <= ram_wdata;
+        if (mem) begin
+            ram_file[ram_waddr] <= ram_wdata;
+        end
     end
 
     always_comb begin
-        if (mem) ram_file[ram_raddr] = ram_rdata;
+        ram_rdata = ram_file[ram_raddr];
     end
+
+
 
 endmodule

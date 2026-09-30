@@ -50,6 +50,8 @@ module cpu_rv32i_datapath (
         .rs2(rs2)
         
     );
+    mux_2x1 U_
+
     mux_2x1 U_ALU_SRC_SEL (
         .mux_sel(alu_src_sel),
         .a(rs2),
